@@ -5,7 +5,7 @@ public class ExtraordinaryVillager extends Villager {
         IDENTIFY("I will identify items for you at no charge."),
         SHELTER("I can offer you poor shelter.");
 
-        private String description;
+        private final String description;
 
         Skill(String description) {
             this.description = description;
@@ -16,7 +16,7 @@ public class ExtraordinaryVillager extends Villager {
         }
     }
 
-    private Skill skill;
+    private final Skill skill;
 
     public ExtraordinaryVillager(String name, int age, Skill skill) {
         super(name, age);
@@ -26,5 +26,15 @@ public class ExtraordinaryVillager extends Villager {
     @Override
     public void sayHello() {
         System.out.println("Greetings traveler... I'm " + getName() + " and I'm " + getAge() + " years old. " + skill.getDescription());
+    }
+
+    @Override
+    public void attack(Fighter victim) {
+        victim.takeHit(0);
+    }
+
+    @Override
+    public void takeHit(int damage) {
+        health = 0;
     }
 }
